@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reloj de steven</title>
+
+    <style>
+
+        *{
+            padding: 0;
+            margin:0;
+            box-sizing: border-box;
+        }
+        body{
+            width: 100%;
+            height: 100vh;
+            background:  #0f3854;
+            background: radial-gradient( ellipse at center, #0a2e38 0%, #000000 70%);
+            background-size:100% ;
+        }
+        p{
+            margin: 0;
+            padding: 0;
+        }
+        .reloj{
+            font-family: "monospace";
+            color: #ffffff;
+            text-align: center;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            text-shadow: 0 0 20px rgb(10,175,230,1), 0 0 20px rgb(10,175,230,0) ;
+        }
+        .tiempo{
+            letter-spacing: 0.05em;
+            font-size: 80px;
+            padding: 5px 0;
+        }
+        .fecha{
+            letter-spacing: 0.1em;
+            font-size: 24px;
+        }
+
+    </style>
+
+</head>
+<body>
+<div class="reloj">
+    <p class="fecha"></p>
+    <p class="tiempo"></p>
+</div>
+<script>
+
+
+    const $tiempo =document.querySelector('.tiempo'),
+        $fecha =document.querySelector('.fecha');
+
+    function digitalClock(){
+        let f=new Date(), //creamos una variable dia
+            dia=f.getDate(),
+            mes=f.getMonth()+1,
+            agno=f.getFullYear(),
+            diaSemana=f.getDay();
+
+        dia=('0'+dia).slice(-2);
+        mes=('0'+mes).slice(-2);
+
+        let timeString =f.toLocaleTimeString();
+        $tiempo.innerHTML=timeString;
+
+        let semana=['lunes','martes','miercoles','jueves','viernes','sabado','domingo'];
+        let showSemana=(semana[diaSemana-1])
+        $fecha.innerHTML=`${agno}-${mes}-${dia}-${showSemana}`;
+    }
+
+    setInterval(() =>{ digitalClock()}, 1000);
+
+</script>
+</body>
+</html>
